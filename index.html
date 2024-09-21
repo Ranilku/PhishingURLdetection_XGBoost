@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phish Defender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('C:\urllegitimacy\static\images\background-image.png');
+            background-size: cover;
+            background-position: center;
+            margin: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .features {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Phish Defender</h1>
+    <form method="POST">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" placeholder="https://example.com" required>
+        <label for="show_features">Show Feature Extractions:</label>
+        <input type="radio" id="show_features" name="show_features" value="yes"> Yes
+        <input type="radio" id="show_features" name="show_features" value="no" checked> No
+        <button type="submit">Check</button>
+    </form>
+    {% if url %}
+    <div class="result">
+        <p>URL: {{ url }}</p>
+        <p>Legitimate: {{ legitimate_prob }}%</p>
+        <p>Phishing: {{ phishing_prob }}%</p>
+    </div>
+    {% if show_features == 'yes' %}
+    <div class="features">
+        <h3>Feature Extractions:</h3>
+        <ul>
+            {% for key, value in features.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
